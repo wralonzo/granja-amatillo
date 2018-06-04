@@ -1,0 +1,48 @@
+{% extends "admin.html" %}
+{% load staticfiles %}
+
+{% block main %}
+
+</table>
+
+    <br>
+<div class="col-md-6 -align-center">
+    <form method="post">
+
+        <div class="col-md-12">
+
+            {% csrf_token %}
+
+            {% for error in form.non_field_errors %}
+                <p>{{ error|safe }}</p>
+            {% endfor %}
+
+        </div>
+
+        <div class="form-group">
+            <input type="text" name="username" class="form-control" placeholder="Usuario">
+            {% if form.username.errors %}
+                <label class="help-block">
+                    <span class="glyphicon glyphicon-info-sign">{{ form.username.errors }}</span></label>
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            <input type="password" name="password" class="form-control" placeholder="Contraseña">
+            {% if form.password.errors %}
+                <span class="help-block"></span>
+                <span class="glyphicon glyphicon-info-sign"></span>{{ form.password.errors }}
+
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+
+            <input type="submit" name="login" class="btn btn-primary form-control" value="Iniciar">
+        </div>
+
+    </form>
+</div>
+<br>
+
+{% endblock %}

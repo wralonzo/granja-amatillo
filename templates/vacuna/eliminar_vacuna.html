@@ -1,0 +1,21 @@
+{% extends "admin.html" %} 
+{% load staticfiles %}
+{% block header %}<br><br><br><br><br><br><br><br
+<br>
+    <div class="container">
+    <form method="post" class="form-center">
+        {% csrf_token %}
+        <p align="center"  class="text-success fa-2x text-danger">Seguro que desea eliminar el registro{{VacunaEliminar.full_vacuna}}</p>
+
+        <div class="container form-group">
+                <div class="col-sm-offset-8 col-sm-8"><div class=" container col-sm-offset-8 col-sm-8"></div>
+                        <a class="btn btn-primary pull-left" href="{% url 'list_vacunas' %}">Volver </a>
+                    <input class="btn btn-primary pull-right" type="submit" name="submit"
+                    value="Eliminar">
+                </div>
+            </div>
+
+    </form><br><br><br><br><br><br><br><br
+{% endblock %}
+{% block  footer%}
+		{% endblock %}

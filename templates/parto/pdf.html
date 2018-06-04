@@ -1,0 +1,40 @@
+
+<!DOCTYPE html>
+{% extends "admin3.html" %} 
+{% load staticfiles i18n %}	
+<html>
+<head>
+	<title></title>
+	
+</head>
+<body>
+		{% block  footer%}
+		<center><p>Listado de cerdos</p><br>
+	
+		<table FRAME="border" RULES="none" >
+				
+			<thead>
+				<tr >
+	<th >nombre</th>
+	<th >genero</th>
+	<th >peso</th>
+	</tr>
+	</thead>
+	<tbody ALIGN="center">
+	
+	{% for i in object_list1 %}
+	<tr >
+		<td  >{{i.cerdo}}</td>		
+		<td  >{{i.fecha_gestacion}}</td>
+		<td  >{{i.fecha_parto}}</td>
+		<td  >{{i.numero_partos}}</td>
+		<td  >{{i.cantidad_por_parto}}</td>
+		
+				
+	</tr>
+	{% endfor %}
+	</tbody>
+	</table>
+	
+	{% endblock %}
+	

@@ -1,0 +1,134 @@
+{% extends "admin.html" %} 
+{% load staticfiles i18n %}
+
+{% block header %}<br><br><br><br><br><br><br><br>
+
+<h1 class="container">Listado de cerdos</h1>
+	<div class="container">
+			<table class="container">
+					
+				<thead>
+					<th><a class="btn btn-primary" href="{% url 'crear_cerdos' %}"> Nuevo Cerdo</a></th>
+					
+					
+					<th>
+							<form class="container" method="POST" action="{% url 'buscar_cerdo'%}">
+									{% csrf_token %}
+								
+								   <input class="search-query" placeholder="Buscar por nombre" type="text" name="buscalo">
+								
+								   <input class="btn btn-primary icon-search" type="submit" value="buscar">
+								  
+								
+							   </form>
+							</div>
+					</th>
+
+
+					<th>
+						<form class="container" method="POST" action="{% url 'generoM'%}">
+								{% csrf_token %}
+							
+							   
+								
+								<input class="btn btn-primary icon-search" type="submit" value="Machos">
+							
+						   </form>
+						</div>
+				</th>
+				<th>
+					<form class="container" method="POST" action="{% url 'generoH'%}">
+							{% csrf_token %}
+						
+						   
+							<input class="btn btn-primary icon-search" type="submit" value="Hembras">
+							
+					   </form>
+					</div>
+			</th>
+					<th><a class="btn btn-primary" href="{% url 'pdfcerdo' %}"> pdf</a></th>
+					<th></th>
+				
+				</thead>
+			</table>
+		</div>
+
+	</div>
+	
+	
+	<div class="container">
+		<table class="table">
+			<thead>
+			<th>
+				Nombre
+			</th>
+			<th>
+				Genero
+			</th>
+			<th>
+				Peso
+			</th>
+			
+			
+			
+			<th>
+				{% if perms.cerdos.change_cerdos %}
+				Editar
+				{% endif %}
+			</th>
+			<th>
+					{% if perms.cerdos.change_cerdos %}
+				Eliminar
+				{% endif %}
+			</th>
+		</thead>
+		<tbody  >
+			{% for cer in cerdo1 %}
+			<tr>
+			<td>
+				{{cer.nombre}}
+			</td>
+			<td>
+				{{cer.genero}}
+			</td>
+			<td>
+				{{cer.peso}}
+			</td>
+			
+			<td>
+				
+				</td>
+			<td>
+
+					{% if perms.cerdos.change_cerdos %}
+					
+					<a class="btn btn-info" href="{% url 'editar_cerdos' cer.id %}">Editar</a>
+					{% endif %}
+
+					
+			</td>
+			<td>{% if perms.cerdos.change_cerdos %}
+					<a class="btn btn-danger" href="{% url 'eliminar_cerdos' cer.id %}">Eliminar</a>{% endif %}
+			</td>
+		</tr>
+			{% endfor %}
+			
+			
+		</tbody>
+		
+		</table>
+
+	</table>
+	
+  
+
+
+
+	{% block  footer%}
+	{% endblock %}
+
+	
+
+	</div>
+{% endblock %}
+
