@@ -1,0 +1,46 @@
+{% extends "easy_pdf/base.html" %}
+
+{% block extra_style %}
+    <style type="text/css">
+        body {
+			
+            font-family: "Helvetica", "sans-serif";
+            color:aqua;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+
+{% for cerdo in cerdos%}
+<tr>
+<td><h1>
+{{cerdo.nombre}}</h1>
+</td>
+<td>
+{{cerdo.genero}}
+</td>
+<td>
+{{cerdo.peso}}
+</td>
+<td>
+
+	{% if perms.cerdos.change_cerdos %}
+	
+	<a class="btn btn-info" href="{% url 'editar_cerdos' cerdo.id %}">Editar</a>
+	<th><a class="btn btn-primary" href="{% url 'pdfcerdo1'  %}"> imprimir</a></th>
+	{% endif %}
+
+	
+</td>
+<td>{% if perms.cerdos.change_cerdos %}
+	<a class="btn btn-danger" href="{% url 'eliminar_cerdos' cerdo.id %}">Eliminar</a>{% endif %}
+</td>
+</tr>
+{% endfor %}
+<div id="content">
+        <div class="main">
+            <h1>Hi there!</h1>
+        </div>
+    </div>
+{%endblock%}

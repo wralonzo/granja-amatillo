@@ -1,0 +1,55 @@
+{% extends "admin.html" %} 
+{% load staticfiles %}
+{% block header %}<br><br>
+    <br>
+    <div class="container">
+    <form method="post" class="form-center">
+        {% csrf_token %}
+        {% for hidden in form.hidden_fields %}
+        {{hidden}}
+        
+        {% endfor %}<br><br><br><br>
+
+        <div class="form-group container">
+            <label  for="{{form.nombre.id_for_label}}"
+                    class="col-sm-8 control-label">{{ form.nombre.label }}</label>
+                <div class="col-sm-8">
+                    {{form.nombre}}
+                </div>
+        </div>
+        <div class="form-group container">
+                <label for="{{form.cerdo.id_for_label}}"
+                        class="col-sm-8 control-label">{{ form.cerdo.label }}</label>
+                    <div class="col-sm-8">
+                        {{form.cerdo}}
+         </div>
+        </div>
+        <div class="form-group container">
+                <label for="{{form.descripcion.id_for_label}}"
+                        class="col-sm-8 control-label">{{ form.descripcion.label }}</label>
+                    <div class="col-sm-8">
+                        {{form.descripcion}}
+                    </div>
+                    <div class="form-group">
+                            <label for="{{form.status.id_for_label}}"
+                                    class="col-sm-8 control-label">{{ form.status.label }}</label>
+                                                       {{form.status}}
+                               
+                    </div>
+        </div>
+        <div class=" container form-group">
+                <div class="col-sm-offset-8 col-sm-8"><div class=" container col-sm-offset-8 col-sm-8"></div>
+                        <a class="btn btn-primary pull-left" href="{% url 'list_vacunas' %}">Volver </a>
+                <input class="btn btn-primary pull-right" type="submit" name="submit"
+                value="Guardar">
+            </div>
+        </div>
+
+
+    </form>
+
+
+</div><br><br><br><br><br><br><br><br
+{% block  footer%}
+		{% endblock %}
+{% endblock %}

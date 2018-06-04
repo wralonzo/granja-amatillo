@@ -1,0 +1,90 @@
+{% extends "admin.html" %} 
+{% load staticfiles i18n %}
+{% block header %}<br><br><br><br><br><br><br><br>
+<h1 class="container">Listado de Vacunas</h1>
+	<div class="container">
+			<table class="container">
+				<thead>
+					<th><a class="btn btn-primary" href="{% url 'crear_vacunas' %}"> Nueva Vacuna</a></th>
+					<th>
+							<form class="container" method="POST" action="{% url 'buscar_vacuna'%}">
+									{% csrf_token %}
+								
+								   <input class="search-query" placeholder="Buscar por nombre" type="text" name="buscalo">
+								
+								   <input   class="btn btn-primary icon-search" type="submit" value="buscar">
+								
+							   </form>
+							</div>
+							<th><a class="btn btn-primary" href="{% url 'pdfvacuna' %}"> pdf</a></th>
+					</th>
+					
+			
+				
+				</thead>
+			</table>
+		</div>
+
+	</div>
+	
+	
+	<div class="container">
+		<table class="table">
+			<thead>
+			<th>
+				Nombre
+			</th>
+			<th>
+				Cerdo
+			</th>
+			<th>
+				Descripcion
+			</th>
+			<th>
+				{% if perms.vacunas.change_vacunas %}
+				Editar
+				{% endif %}
+			</th>
+			<th>
+					{% if perms.vacunas.change_vacunas  %}
+				Eliminar
+				{% endif %}
+			</th>
+		</thead>
+		<tbody  >
+			{% for cer in vacunas1 %}
+			<tr>
+			<td>
+				{{cer.nombre}}
+			</td>
+			<td>
+				{{cer.cerdo}}
+			</td>
+			<td>
+				{{cer.descripcion}}
+			</td>
+			<td>
+
+					{% if  perms.vacunas.change_vacunas %}
+					
+					<a class="btn btn-info" href="{% url 'editar_vacunas' cer.id %}">Editar</a>
+					{% endif %}
+
+					
+			</td>
+			<td>{% if  perms.vacunas.change_vacunas %}
+					<a class="btn btn-danger" href="{% url 'eliminar_vacunas' cer.id %}">Eliminar</a>{% endif %}
+			</td>
+		</tr>
+			{% endfor %}
+			
+		</tbody>
+		
+		</table><br><br><br><br><br><br><br><br
+		{% block  footer%}
+		{% endblock %}
+	
+
+	</div>
+{% endblock %}
+

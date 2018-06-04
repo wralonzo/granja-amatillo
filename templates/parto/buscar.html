@@ -1,0 +1,103 @@
+{% extends "admin.html" %} 
+
+
+{% load staticfiles i18n %}
+
+{% block header %}<br><br><br><br><br><br><br><br>
+
+<h1 class="container">Listado de partos</h1>
+	<div class="container">
+			<table class="container">
+					
+				<thead>
+                    <th><a class="btn btn-primary" href="{% url 'list_partos' %}"> Volver</a></th>
+                  
+					
+				
+					<th></th>
+				
+				</thead>
+			</table>
+		</div>
+
+	</div>
+	
+	
+	<div class="container">
+		<table class="table">
+			<thead>
+			<th>
+				Nombre
+			</th>
+			<th>
+				Genero
+			</th>
+			<th>
+				Peso
+			</th>
+			<th>
+				{% if perms.cerdos.change_cerdos %}
+				Editar
+				{% endif %}
+			</th>
+			<th>
+					{% if perms.cerdos.change_cerdos %}
+				Eliminar
+				{% endif %}
+			</th>
+		</thead>
+		<tbody  >
+				{% block content %}
+				{%if parto %}
+				{% for cer in parto %}
+				<tr>
+				<td>
+					{{cer.cerdo}}
+				</td>
+				<td>
+					{{cer.fecha_gestacion}}
+				</td>
+				<td>
+					{{cer.fecha_parto}}
+				</td>
+				<td>
+					{{cer.numero_partos}}
+				</td>
+				<td>
+					{{cer.cantidad_por_parto}}
+				</td>
+				<td>
+	
+						{% if  perms.vacunas.change_vacunas %}
+	
+						<a class="btn btn-info" href="{% url 'editar_partos' cer.id %}">Editar</a>
+						{% endif %}
+	
+	
+				</td>
+				<td>{% if  perms.vacunas.change_vacunas %}
+						<a class="btn btn-danger" href="{% url 'eliminar_partos' cer.id %}">Eliminar</a>{% endif %}
+				</td>
+			</tr>
+				{% endfor %}
+
+				{%else%}
+				<p align="center"  class="text-success fa-2x text-danger">No existen datos</p>
+
+				{%endif%}
+
+            {%endblock%}
+			
+		</tbody>
+		
+		</table>
+
+	</table><br><br><br><br><br><br><br><br
+	{% block  footer%}
+	{% endblock %}
+
+	
+
+	</div>
+{% endblock %}
+
